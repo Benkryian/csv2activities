@@ -1,0 +1,11 @@
+c:\users\camo\documents\visual studio 2015\Projects\csv2activities\csv2activities\bin\Debug\csv2activities.exe.config
+c:\users\camo\documents\visual studio 2015\Projects\csv2activities\csv2activities\bin\Debug\csv2activities.exe
+c:\users\camo\documents\visual studio 2015\Projects\csv2activities\csv2activities\bin\Debug\csv2activities.pdb
+c:\users\camo\documents\visual studio 2015\Projects\csv2activities\csv2activities\obj\Debug\csv2activities.csprojResolveAssemblyReference.cache
+c:\users\camo\documents\visual studio 2015\Projects\csv2activities\csv2activities\obj\Debug\Interop.SAPbobsCOM.dll
+c:\users\camo\documents\visual studio 2015\Projects\csv2activities\csv2activities\obj\Debug\csv2activities.csproj.ResolveComReference.cache
+c:\users\camo\documents\visual studio 2015\Projects\csv2activities\csv2activities\obj\Debug\csv2activities.Form1.resources
+c:\users\camo\documents\visual studio 2015\Projects\csv2activities\csv2activities\obj\Debug\csv2activities.Properties.Resources.resources
+c:\users\camo\documents\visual studio 2015\Projects\csv2activities\csv2activities\obj\Debug\csv2activities.csproj.GenerateResource.Cache
+c:\users\camo\documents\visual studio 2015\Projects\csv2activities\csv2activities\obj\Debug\csv2activities.exe
+c:\users\camo\documents\visual studio 2015\Projects\csv2activities\csv2activities\obj\Debug\csv2activities.pdb
