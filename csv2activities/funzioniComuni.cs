@@ -4,34 +4,15 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace csv2activities
 {
     public static class funzioniComuni
     {
-
-        public static void fetchCSV(string file,char splitter){
-
-            //se uso "@"+file mi fa un escape dei caratteri come la barra. Non mi serve perchè file viene già generato con la dopiia \ per l'escape
-            using (var reader = new StreamReader(file))
-            {
-                List<string> listA = new List<string>();
-                List<string> listB = new List<string>();
-                while (!reader.EndOfStream)
-                {
-                    var line = reader.ReadLine();
-                    var values = line.Split(splitter);
-
-                    //listA.Add(values[0]);
-                    //listB.Add(values[1]);
-
-                }
-            }
-
-        }
-
-
-}
+        
+       
+     }
 
 
     //classe che definisce l'oggetto attività basato sulla tabella OCLG
