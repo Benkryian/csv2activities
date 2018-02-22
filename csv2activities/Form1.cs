@@ -17,6 +17,17 @@ namespace csv2activities
         public Form1()
         {
             InitializeComponent();
+
+            textBox1.Text = Properties.connection.Default.server;
+            textBox2.Text = Properties.connection.Default.port;
+            comboBox1.Text = Properties.connection.Default.type;
+            textBox4.Text = Properties.connection.Default.dbUser;
+            textBox5.Text = Properties.connection.Default.dbPassword;
+
+            textBox6.Text = Properties.connection.Default.sapUser;
+            textBox7.Text = Properties.connection.Default.sapPassword;
+            textBox8.Text = Properties.connection.Default.sapCompany;
+
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -28,6 +39,8 @@ namespace csv2activities
             dialog.Multiselect = false; // allow/deny user to upload more than one file at a time
             if (dialog.ShowDialog() == DialogResult.OK) // if user clicked OK
             {
+                Application.DoEvents();
+                Cursor = Cursors.WaitCursor; 
                 var myCompany = connectSap();
 
                 string path = dialog.FileName; // get name of file
@@ -42,7 +55,7 @@ namespace csv2activities
                 }
 
                 SAPHelper.destroyCom(myCompany);
-
+                Cursor = Cursors.Default;
             }
          
         }
@@ -110,14 +123,20 @@ namespace csv2activities
 
         private void button3_Click(object sender, EventArgs e)
         {
+            Application.DoEvents();
+            Cursor = Cursors.WaitCursor;
             connectSap(true, true);
+            Cursor = Cursors.Default;
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
+            Application.DoEvents();
+            Cursor = Cursors.WaitCursor;
             var myCompany = connectSap();
             SAPHelper.getActToXML(myCompany);
             SAPHelper.destroyCom(myCompany);
+            Cursor = Cursors.Default;
         }
 
         private void button4_Click(object sender, EventArgs e)
@@ -128,6 +147,8 @@ namespace csv2activities
             dialog.Multiselect = false; // allow/deny user to upload more than one file at a time
             if (dialog.ShowDialog() == DialogResult.OK) // if user clicked OK
             {
+                Application.DoEvents();
+                Cursor = Cursors.WaitCursor;
                 var myCompany = connectSap();
 
                 string path = dialog.FileName; // get name of file
@@ -143,8 +164,26 @@ namespace csv2activities
                 }
 
                 SAPHelper.destroyCom(myCompany);
+                Cursor = Cursors.Default;
 
             }
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            Properties.connection.Default.server = textBox1.Text;
+            Properties.connection.Default.port = textBox2.Text;
+            Properties.connection.Default.type = comboBox1.Text;
+            Properties.connection.Default.dbUser = textBox4.Text;
+            Properties.connection.Default.dbPassword = textBox5.Text;
+            Properties.connection.Default.sapUser = textBox6.Text;
+            Properties.connection.Default.sapPassword = textBox7.Text;
+            Properties.connection.Default.sapCompany = textBox8.Text;
+            
+            Properties.connection.Default.Save();
+
+            MessageBox.Show("Configuration saved", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
         }
     }
 }

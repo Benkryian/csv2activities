@@ -1,0 +1,30 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="csv2activities.Properties" GeneratedClassName="connection">
+  <Profiles />
+  <Settings>
+    <Setting Name="server" Type="System.String" Scope="User">
+      <Value Profile="(Default)">ip or domain </Value>
+    </Setting>
+    <Setting Name="port" Type="System.String" Scope="User">
+      <Value Profile="(Default)">30015</Value>
+    </Setting>
+    <Setting Name="type" Type="System.String" Scope="User">
+      <Value Profile="(Default)">hana</Value>
+    </Setting>
+    <Setting Name="dbUser" Type="System.String" Scope="User">
+      <Value Profile="(Default)">DB User</Value>
+    </Setting>
+    <Setting Name="dbPassword" Type="System.String" Scope="User">
+      <Value Profile="(Default)">DB password</Value>
+    </Setting>
+    <Setting Name="sapUser" Type="System.String" Scope="User">
+      <Value Profile="(Default)">B1 User</Value>
+    </Setting>
+    <Setting Name="sapPassword" Type="System.String" Scope="User">
+      <Value Profile="(Default)">B1 Password</Value>
+    </Setting>
+    <Setting Name="sapCompany" Type="System.String" Scope="User">
+      <Value Profile="(Default)">B1 Company</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

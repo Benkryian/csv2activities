@@ -64,155 +64,188 @@ namespace csv2activities
 
         public static bool insActFromCSV(Company myCompany, string file, char splitter)
         {
-
-            //se uso "@"+file mi fa un escape dei caratteri come la barra. Non mi serve perchè file viene già generato con la dopiia \ per l'escape
-            using (var reader = new StreamReader(file))
+            if (myCompany != null && myCompany.Connected)
             {
 
-                while (!reader.EndOfStream)
+                //se uso "@"+file mi fa un escape dei caratteri come la barra. Non mi serve perchè file viene già generato con la dopiia \ per l'escape
+                using (var reader = new StreamReader(file))
                 {
-                    var line = reader.ReadLine();
-                    var values = line.Split(splitter);
 
-                    //listA.Add(values[0]);
-                    //listB.Add(values[1]);
-                    Contacts i = myCompany.GetBusinessObject(BoObjectTypes.oContacts);
-                    //ADD a new Contact
-
-                    try
+                    while (!reader.EndOfStream)
                     {
-                        bool convertible = false;
-                        int actType = 0;
-                        convertible = int.TryParse(values[3].Replace('"', ' ').Trim(), out actType);
+                        var line = reader.ReadLine();
+                        var values = line.Split(splitter);
 
-                        bool convertible2 = false;
-                        int act = 0;
-                        convertible2 = int.TryParse(values[2].Replace('"', ' ').Trim(), out act);
+                        //listA.Add(values[0]);
+                        //listB.Add(values[1]);
+                        Contacts i = myCompany.GetBusinessObject(BoObjectTypes.oContacts);
+                        //ADD a new Contact
 
-                        DateTime start = new DateTime();
-                        DateTime end = new DateTime();
-                        start = funzioniComuni.sapToDatetime(values[5].Replace('"', ' ').Trim());
-                        end = funzioniComuni.sapToDatetime(values[6].Replace('"', ' ').Trim());
-
-                        i.CardCode = values[0].Replace('"', ' ').Trim();
-                        i.Details = values[1].Replace('"', ' ').Trim();
-                        i.Activity = (BoActivities)act;
-                        i.ActivityType = actType;
-                        i.Notes = values[4].Replace('"', ' ').Trim();
-                        i.StartTime = start;
-                        i.EndTime = end;
-
-                        //gestione custom fields
-                        //i.UserFields.Fields.Item("U_MATRICOLA").Value = "2134325236";
-                        int p = i.Add();
-
-                        if (p < 0)
+                        try
                         {
-                            return false;
+                            bool convertible = false;
+                            int actType = 0;
+                            convertible = int.TryParse(values[3].Replace('"', ' ').Trim(), out actType);
+
+                            bool convertible2 = false;
+                            int act = 0;
+                            convertible2 = int.TryParse(values[2].Replace('"', ' ').Trim(), out act);
+
+                            DateTime start = new DateTime();
+                            DateTime end = new DateTime();
+                            start = funzioniComuni.sapToDatetime(values[5].Replace('"', ' ').Trim());
+                            end = funzioniComuni.sapToDatetime(values[6].Replace('"', ' ').Trim());
+
+                            i.CardCode = values[0].Replace('"', ' ').Trim();
+                            i.Details = values[1].Replace('"', ' ').Trim();
+                            i.Activity = (BoActivities)act;
+                            i.ActivityType = actType;
+                            i.Notes = values[4].Replace('"', ' ').Trim();
+                            i.StartTime = start;
+                            i.EndTime = end;
+
+                            //gestione custom fields
+                            //i.UserFields.Fields.Item("U_MATRICOLA").Value = "2134325236";
+                            int p = i.Add();
+
+                            if (p < 0)
+                            {
+                                return false;
+                            }
                         }
-                    }
-                    catch (Exception e)
-                    {
+                        catch (Exception e)
+                        {
 
-                        Console.WriteLine(""+e);
-                    }
+                            Console.WriteLine("" + e);
+                        }
 
+                    }
                 }
+
+                return true;
+
+
+            }
+            else
+            {
+                return false;
             }
 
-            return true;
 
         }
 
         public static bool updActFromCSV(Company myCompany, string file, char splitter)
         {
-
-            //se uso "@"+file mi fa un escape dei caratteri come la barra. Non mi serve perchè file viene già generato con la dopiia \ per l'escape
-            using (var reader = new StreamReader(file))
+            if (myCompany != null && myCompany.Connected)
             {
 
-                while (!reader.EndOfStream)
+                //se uso "@"+file mi fa un escape dei caratteri come la barra. Non mi serve perchè file viene già generato con la dopiia \ per l'escape
+                using (var reader = new StreamReader(file))
                 {
-                    var line = reader.ReadLine();
-                    var values = line.Split(splitter);
 
-                    Contacts i = myCompany.GetBusinessObject(BoObjectTypes.oContacts);
-                   
-                    //UPDATE a Contact
-
-                    try
+                    while (!reader.EndOfStream)
                     {
-                        bool convertible = false;
-                        int actType = 0;
-                        convertible = int.TryParse(values[3].Replace('"', ' ').Trim(), out actType);
+                        var line = reader.ReadLine();
+                        var values = line.Split(splitter);
 
-                        int act = 0;
-                        convertible = int.TryParse(values[2].Replace('"', ' ').Trim(), out act);
+                        Contacts i = myCompany.GetBusinessObject(BoObjectTypes.oContacts);
 
-                        DateTime start = new DateTime();
-                        DateTime end = new DateTime();
-                        start = funzioniComuni.sapToDatetime(values[5].Replace('"', ' ').Trim());
-                        end = funzioniComuni.sapToDatetime(values[6].Replace('"', ' ').Trim());
+                        //UPDATE a Contact
 
-                        int last = values.Length;
-                        int actCode = 0;
-                        convertible = int.TryParse(values[last-1].Replace('"', ' ').Trim(), out actCode);
-
-                        i.GetByKey(actCode);
-                        i.CardCode = values[0].Replace('"', ' ').Trim();
-                        i.Details = values[1].Replace('"', ' ').Trim();
-                        i.Activity = (BoActivities)act;
-                        i.ActivityType = actType;
-                        i.Notes = values[4].Replace('"', ' ').Trim();
-                        i.StartTime = start;
-                        i.EndTime = end;
-                                            
-                        int u = i.Update();
-
-                        if (u < 0)
+                        try
                         {
-                            return false;
-                        }
-                    }
-                    catch (Exception e)
-                    {
+                            bool convertible = false;
+                            int actType = 0;
+                            convertible = int.TryParse(values[3].Replace('"', ' ').Trim(), out actType);
 
-                        Console.WriteLine("" + e);
+                            int act = 0;
+                            convertible = int.TryParse(values[2].Replace('"', ' ').Trim(), out act);
+
+                            DateTime start = new DateTime();
+                            DateTime end = new DateTime();
+                            start = funzioniComuni.sapToDatetime(values[5].Replace('"', ' ').Trim());
+                            end = funzioniComuni.sapToDatetime(values[6].Replace('"', ' ').Trim());
+
+                            int last = values.Length;
+                            int actCode = 0;
+                            convertible = int.TryParse(values[last - 1].Replace('"', ' ').Trim(), out actCode);
+
+                            i.GetByKey(actCode);
+                            i.CardCode = values[0].Replace('"', ' ').Trim();
+                            i.Details = values[1].Replace('"', ' ').Trim();
+                            i.Activity = (BoActivities)act;
+                            i.ActivityType = actType;
+                            i.Notes = values[4].Replace('"', ' ').Trim();
+                            i.StartTime = start;
+                            i.EndTime = end;
+
+                            int u = i.Update();
+
+                            if (u < 0)
+                            {
+                                return false;
+                            }
+                        }
+                        catch (Exception e)
+                        {
+
+                            Console.WriteLine("" + e);
+                        }
+
                     }
+
+                    return true;
 
                 }
 
-                return true;
 
             }
+            else
+            {
+                return false;
+            }
+
         }
 
-        public static void getActToXML(Company myCompany)
+        public static bool getActToXML(Company myCompany)
         {
-            //metodo precedente all'introduzione del CRM in sap
-            ActivitiesService acts = myCompany.GetCompanyService().GetBusinessService(ServiceTypes.ActivitiesService) as ActivitiesService;
-            Activity myAct = acts.GetDataInterface(ActivitiesServiceDataInterfaces.asActivity);
 
-            //get dei dati
-            string TodayDateQuery = DateTime.Now.ToString("yyyy-MM-dd");
-            Recordset RecSet = myCompany.GetBusinessObject(BoObjectTypes.BoRecordset);
-            RecSet.DoQuery("select * from \"OCLG\",\"DUMMY\" WHERE \"CntctDate\"= TO_TIMESTAMP ('"+TodayDateQuery+" 00:00:00', 'YYYY-MM-DD HH24:MI:SS')");
-            
-
-            string pathToXml = Path.GetDirectoryName(Application.ExecutablePath);
-            string TodayDate = DateTime.Now.ToString("dd-MM-yyyy");
-
-            RecSet.SaveXML(TodayDate+"_activities.xml");
-            MessageBox.Show("File saved in '"+ pathToXml+"' ", "Export to XML", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            
-            /*
-            var o = RecSet.RecordCount;
-            while (!RecSet.EoF)
+            if (myCompany != null && myCompany.Connected)
             {
-                var CardCode = RecSet.Fields.Item("CardCode");
-                RecSet.MoveNext();
+
+                //metodo precedente all'introduzione del CRM in sap
+                ActivitiesService acts = myCompany.GetCompanyService().GetBusinessService(ServiceTypes.ActivitiesService) as ActivitiesService;
+                Activity myAct = acts.GetDataInterface(ActivitiesServiceDataInterfaces.asActivity);
+
+                //get dei dati
+                string TodayDateQuery = DateTime.Now.ToString("yyyy-MM-dd");
+                Recordset RecSet = myCompany.GetBusinessObject(BoObjectTypes.BoRecordset);
+                RecSet.DoQuery("select * from \"OCLG\",\"DUMMY\" WHERE \"CntctDate\"= TO_TIMESTAMP ('" + TodayDateQuery + " 00:00:00', 'YYYY-MM-DD HH24:MI:SS')");
+
+
+                string pathToXml = Path.GetDirectoryName(Application.ExecutablePath);
+                string TodayDate = DateTime.Now.ToString("dd-MM-yyyy");
+
+                RecSet.SaveXML(TodayDate + "_activities.xml");
+                MessageBox.Show("File saved in '" + pathToXml + "' ", "Export to XML", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                /*
+                var o = RecSet.RecordCount;
+                while (!RecSet.EoF)
+                {
+                    var CardCode = RecSet.Fields.Item("CardCode");
+                    RecSet.MoveNext();
+                }
+                */
+                return true;
+
+
             }
-            */
+            else {
+                return false;
+            }
+
+
         }
         //destroy dell'oggetto company
         public static void destroyCom(Company myCompany)
