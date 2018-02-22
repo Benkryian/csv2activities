@@ -10,9 +10,24 @@ namespace csv2activities
 {
     public static class funzioniComuni
     {
-        
+       public static DateTime sapToDatetime(string sapHour)
+        {
+            sapHour = sapHour.PadLeft(4, '0');
+            string sapH = sapHour.Substring(0, 2);
+            string sapM = sapHour.Substring(2, 2);
+
+            bool convertible = false;
+            int Hour = 0;
+            convertible = int.TryParse(sapH, out Hour);
+            int Minute = 0;
+            convertible = int.TryParse(sapM, out Minute);
+
+            DateTime Today = DateTime.Now;
+            DateTime dtHour = new DateTime(Today.Year, Today.Month, Today.Day, Hour, Minute, 0);
+            return dtHour;
+        }
        
-     }
+    }
 
 
     //classe che definisce l'oggetto attività basato sulla tabella OCLG

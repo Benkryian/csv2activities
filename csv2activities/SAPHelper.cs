@@ -81,9 +81,27 @@ namespace csv2activities
 
                     try
                     {
-                        i.Notes = values[1].Replace('"', ' ').Trim();
+                        bool convertible = false;
+                        int actType = 0;
+                        convertible = int.TryParse(values[3].Replace('"', ' ').Trim(), out actType);
+
+                        bool convertible2 = false;
+                        int act = 0;
+                        convertible2 = int.TryParse(values[2].Replace('"', ' ').Trim(), out act);
+
+                        DateTime start = new DateTime();
+                        DateTime end = new DateTime();
+                        start = funzioniComuni.sapToDatetime(values[5].Replace('"', ' ').Trim());
+                        end = funzioniComuni.sapToDatetime(values[6].Replace('"', ' ').Trim());
+
                         i.CardCode = values[0].Replace('"', ' ').Trim();
-                        
+                        i.Details = values[1].Replace('"', ' ').Trim();
+                        i.Activity = (BoActivities)act;
+                        i.ActivityType = actType;
+                        i.Notes = values[4].Replace('"', ' ').Trim();
+                        i.StartTime = start;
+                        i.EndTime = end;
+
                         //gestione custom fields
                         //i.UserFields.Fields.Item("U_MATRICOLA").Value = "2134325236";
                         int p = i.Add();

@@ -8,4 +8,4 @@ C:\Users\camo\documents\visual studio 2015\Projects\csv2activities\csv2activitie
 C:\Users\camo\documents\visual studio 2015\Projects\csv2activities\csv2activities\obj\x64\Debug\csv2activities.csproj.GenerateResource.Cache
 C:\Users\camo\documents\visual studio 2015\Projects\csv2activities\csv2activities\obj\x64\Debug\csv2activities.exe
 C:\Users\camo\documents\visual studio 2015\Projects\csv2activities\csv2activities\obj\x64\Debug\csv2activities.pdb
-C:\Users\camo\documents\visual studio 2015\Projects\csv2activities\csv2activities\obj\x64\Debug\csv2activities.csv2activities.resources
+C:\Users\camo\documents\visual studio 2015\Projects\csv2activities\csv2activities\obj\x64\Debug\csv2activities.Form1.resources

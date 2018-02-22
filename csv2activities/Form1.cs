@@ -12,9 +12,9 @@ using System.Windows.Forms;
 
 namespace csv2activities
 {
-    public partial class csv2activities : Form
+    public partial class Form1 : Form
     {
-        public csv2activities()
+        public Form1()
         {
             InitializeComponent();
         }
@@ -82,7 +82,7 @@ namespace csv2activities
             }
             
             //connetti a DB
-           
+            
             Company myCompany = SAPHelper.getSocieta(server, port, tipo, dbUser, dbPassword, b1User, b1Pass, b1Company);
             if (popup)
             {

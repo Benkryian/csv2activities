@@ -16,7 +16,7 @@ namespace csv2activities
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new csv2activities());
+            Application.Run(new Form1());
         }
     }
 }
