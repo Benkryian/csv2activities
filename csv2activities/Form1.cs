@@ -119,5 +119,32 @@ namespace csv2activities
             SAPHelper.getActToXML(myCompany);
             SAPHelper.destroyCom(myCompany);
         }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog dialog = new OpenFileDialog();
+            dialog.Filter = "CSV files | *.csv"; // file types, that will be allowed to upload
+            dialog.Filter += "| TXT files | *.txt";
+            dialog.Multiselect = false; // allow/deny user to upload more than one file at a time
+            if (dialog.ShowDialog() == DialogResult.OK) // if user clicked OK
+            {
+                var myCompany = connectSap();
+
+                string path = dialog.FileName; // get name of file
+                bool check = SAPHelper.updActFromCSV(myCompany, path, ',');
+
+                if (check)
+                {
+                    MessageBox.Show("All records updated correctly", "Update from CSV", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                {
+                    MessageBox.Show("Somethings goes wrong, check the CSV format", "Update from CSV", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+
+                SAPHelper.destroyCom(myCompany);
+
+            }
+        }
     }
 }

@@ -124,6 +124,69 @@ namespace csv2activities
 
         }
 
+        public static bool updActFromCSV(Company myCompany, string file, char splitter)
+        {
+
+            //se uso "@"+file mi fa un escape dei caratteri come la barra. Non mi serve perchè file viene già generato con la dopiia \ per l'escape
+            using (var reader = new StreamReader(file))
+            {
+
+                while (!reader.EndOfStream)
+                {
+                    var line = reader.ReadLine();
+                    var values = line.Split(splitter);
+
+                    Contacts i = myCompany.GetBusinessObject(BoObjectTypes.oContacts);
+                   
+                    //UPDATE a Contact
+
+                    try
+                    {
+                        bool convertible = false;
+                        int actType = 0;
+                        convertible = int.TryParse(values[3].Replace('"', ' ').Trim(), out actType);
+
+                        int act = 0;
+                        convertible = int.TryParse(values[2].Replace('"', ' ').Trim(), out act);
+
+                        DateTime start = new DateTime();
+                        DateTime end = new DateTime();
+                        start = funzioniComuni.sapToDatetime(values[5].Replace('"', ' ').Trim());
+                        end = funzioniComuni.sapToDatetime(values[6].Replace('"', ' ').Trim());
+
+                        int last = values.Length;
+                        int actCode = 0;
+                        convertible = int.TryParse(values[last-1].Replace('"', ' ').Trim(), out actCode);
+
+                        i.GetByKey(actCode);
+                        i.CardCode = values[0].Replace('"', ' ').Trim();
+                        i.Details = values[1].Replace('"', ' ').Trim();
+                        i.Activity = (BoActivities)act;
+                        i.ActivityType = actType;
+                        i.Notes = values[4].Replace('"', ' ').Trim();
+                        i.StartTime = start;
+                        i.EndTime = end;
+                                            
+                        int u = i.Update();
+
+                        if (u < 0)
+                        {
+                            return false;
+                        }
+                    }
+                    catch (Exception e)
+                    {
+
+                        Console.WriteLine("" + e);
+                    }
+
+                }
+
+                return true;
+
+            }
+        }
+
         public static void getActToXML(Company myCompany)
         {
             //metodo precedente all'introduzione del CRM in sap
