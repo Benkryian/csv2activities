@@ -20,4 +20,9 @@ Same structure for both:
 * StartTime ( starting time for the activity in B1 format, like 1030 )	
 * EndTime (ending time for the activity in B1 format, like 1730)
 
+Only in updateAct.csv there is one more field
+* ContactCode (int, primary key for OCLG table)
+
+ContactCode must always be at the end of the file. If you add field you must add it before ContactCode. 
+
 
